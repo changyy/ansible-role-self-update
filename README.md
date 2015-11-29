@@ -15,7 +15,7 @@ The Solution:
 Requirements
 ------------
 
-At default setup, the target server is running on Ubuntu 14.04 with packages: curl. Using curl & jq to get target server public ip from http://ipinfo.io: 
+At default setup, the target server is running on Ubuntu 14.04 with packages: curl. Using curl to get target server public ip from http://ipinfo.io: 
 
 ```bash
 $ curl -s ipinfo.io/ip
