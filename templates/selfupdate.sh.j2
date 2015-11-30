@@ -11,7 +11,7 @@ export selfupdate_ansible_command_server_host_in_playbook_yml={{selfupdate_ansib
 export selfupdate_ansible_command_server_private_key_for_playbook_usage={{selfupdate_ansible_command_server_private_key_for_playbook_usage}}
 
 remote_cmd="\
-cd $selfupdate_ansible_command_server_workspace && \
+cd $selfupdate_ansible_command_server_workspace && ((test -d .git && git pull) || echo 'skip workspace update') && \
 	ANSIBLE_HOST_KEY_CHECKING=false \
 	HOST=$selfupdate_ansible_command_server_host_in_playbook_yml \
 	DATA=[$selfupdate_self_public_ip] \
