@@ -6,6 +6,10 @@
 - name: Copy selfupdate script
   template: src=selfupdate.sh.j2 dest="{{selfupdate_script_location}}" mode=0755 owner=root
 
-- name: Auto run at boot
-  lineinfile: dest="{{selfupdate_script_boot_file}}" line="bash {{selfupdate_script_location}};" insertbefore="^exit.*"
+- name: Auto run at boot - reset all
+  lineinfile: dest="{{selfupdate_script_boot_file}}" regexp="^bash {{selfupdate_script_location}}.*" state=absent
+  when: selfupdate_script_install_boot
+
+- name: Auto run at boot - setup
+  lineinfile: dest="{{selfupdate_script_boot_file}}" line="bash {{selfupdate_script_location}} > /var/log/self-update.log" insertbefore="^exit.*"
   when: selfupdate_script_install_boot
